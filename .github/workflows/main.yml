@@ -1,23 +1,22 @@
 name: Calculator Test and Deploy
 
 on:
- push:
-  branches:
-   - main
+  push:
+    branches:
+      - main
 
 jobs:
- test:
- runs-on: ubuntu-latest
- steps:
- - name: Checkout code
-   uses: actions/checkout@v7
-   
- - name: Set up python
-   uses: actions/setup-python@v4
-    with: 
-     python-version:'3.10'
-  
- - name: Install dependencies
-   run: pip install -r requirements.txt
- 
- 
+  test:                     # ERROR FIX: runs-on and steps must be inside test job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:               # ERROR FIX: with must align with uses
+          python-version: '3.10'   # ERROR FIX: add space after :
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
